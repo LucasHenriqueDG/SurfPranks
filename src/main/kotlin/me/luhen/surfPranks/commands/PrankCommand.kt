@@ -1,6 +1,7 @@
 package me.luhen.surfPranks.commands
 
 import me.luhen.surfPranks.SurfPranks
+import me.luhen.surfPranks.pranks.FakeCreeper
 import me.luhen.surfPranks.pranks.Fart
 import me.luhen.surfPranks.pranks.Spit
 import me.luhen.surfPranks.utils.ChatUtils
@@ -27,6 +28,12 @@ object PrankCommand: CommandExecutor {
                     "spit" -> {
 
                         Spit.spit(sender)
+
+                    }
+
+                    "creeper" -> {
+
+                        FakeCreeper.spawnFakeCreeper(sender)
 
                     }
 
