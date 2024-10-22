@@ -7,3 +7,4 @@ description: Schedule custom messages to be sent to all the players on the serve
 commands:
   prank: {}
   pranks: {}
+  surfpranks: {}

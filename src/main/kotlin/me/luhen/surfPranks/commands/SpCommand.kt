@@ -1,6 +1,7 @@
 package me.luhen.surfPranks.commands
 
 import me.luhen.surfPranks.SurfPranks
+import me.luhen.surfPranks.tasks.RandomPrank
 import me.luhen.surfPranks.utils.ChatUtils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -26,6 +27,12 @@ object SpCommand: CommandExecutor {
 
                         SurfPranks.instance.logger.info("[Surf Pranks] Config file reloaded!")
 
+                    }
+
+                    if(!SurfPranks.instance.config.getBoolean("random-pranks", false)) {
+                        RandomPrank.cancelRandomPrankTask()
+                    } else {
+                        RandomPrank.randomPrank(SurfPranks.instance.config.getInt("random-prank-interval"))
                     }
 
                 }

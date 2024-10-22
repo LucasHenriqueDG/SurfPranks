@@ -2,6 +2,7 @@ package me.luhen.surfPranks.commands
 
 import me.luhen.surfPranks.SurfPranks
 import me.luhen.surfPranks.pranks.Fart
+import me.luhen.surfPranks.pranks.Spit
 import me.luhen.surfPranks.utils.ChatUtils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -13,17 +14,31 @@ object PrankCommand: CommandExecutor {
 
         if(sender is Player){
 
-            if(args.size == 1){
+            if(args.size == 1) {
 
-                if(args[0] == "fart"){
+                when (args[0]) {
 
-                    Fart.playerFart(sender)
+                    "fart" -> {
 
-                } else {
+                        Fart.playerFart(sender)
 
-                    sender.sendMessage(ChatUtils.colors(
-                        SurfPranks.instance.config.getString("wrong-command-usage-message").toString())
-                    )
+                    }
+
+                    "spit" -> {
+
+                        Spit.spit(sender)
+
+                    }
+
+                    else -> {
+
+                        sender.sendMessage(
+                            ChatUtils.colors(
+                                SurfPranks.instance.config.getString("wrong-command-usage-message").toString()
+                            )
+                        )
+
+                    }
 
                 }
 
