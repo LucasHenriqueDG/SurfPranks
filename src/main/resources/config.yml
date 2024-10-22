@@ -1,0 +1,3 @@
+command-usage-message: "&b[Surf Pranks] &dTry /prank &f<prankname>"
+wrong-command-usage-message:  "&b[Surf Pranks] &cWrong argument, try &a/pranks"
+prank-list: "&b[Surf Pranks] &dCurrent available pranks: &6%prank_list%"

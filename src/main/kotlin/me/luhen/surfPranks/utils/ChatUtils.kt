@@ -10,4 +10,10 @@ object ChatUtils {
 
     }
 
+    fun replacePlaceholders(input: String, placeholders: Pair<String, String>): String{
+
+        return input.replace(placeholders.first, placeholders.second)
+
+    }
+
 }

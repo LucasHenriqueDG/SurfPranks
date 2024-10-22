@@ -23,6 +23,8 @@ class SurfPranks : JavaPlugin() {
 
     override fun onEnable() {
 
+        saveDefaultConfig()
+
         getCommand("prank")!!.setExecutor(PrankCommand)
         getCommand("pranks")!!.setExecutor(PranksCommand)
 

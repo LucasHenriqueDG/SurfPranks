@@ -1,5 +1,6 @@
 package me.luhen.surfPranks.commands
 
+import me.luhen.surfPranks.SurfPranks
 import me.luhen.surfPranks.utils.ChatUtils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,11 +12,16 @@ object PranksCommand:CommandExecutor {
 
         if(sender is Player){
 
-            sender.sendMessage(ChatUtils.colors("&b[Surf Pranks] &dCurrent available pranks: &6fart."))
+            val pranks = "fart"
+
+            sender.sendMessage(ChatUtils.colors(ChatUtils.replacePlaceholders(
+                SurfPranks.instance.config.getString("prank-list").toString(), Pair("%prank_list%", pranks)))
+            )
 
         }
 
         return true
 
     }
+
 }

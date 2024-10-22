@@ -1,5 +1,6 @@
 package me.luhen.surfPranks.commands
 
+import me.luhen.surfPranks.SurfPranks
 import me.luhen.surfPranks.pranks.Fart
 import me.luhen.surfPranks.utils.ChatUtils
 import org.bukkit.command.Command
@@ -20,13 +21,17 @@ object PrankCommand: CommandExecutor {
 
                 } else {
 
-                    sender.sendMessage(ChatUtils.colors("&b[Surf Pranks] &cWrong argument, try &a/pranks"))
+                    sender.sendMessage(ChatUtils.colors(
+                        SurfPranks.instance.config.getString("wrong-command-usage-message").toString())
+                    )
 
                 }
 
             } else {
 
-                sender.sendMessage(ChatUtils.colors("&b[Surf Pranks] &dTry /prank &f<prankname>"))
+                sender.sendMessage(ChatUtils.colors(
+                    SurfPranks.instance.config.getString("command-usage-message").toString())
+                )
 
             }
 
