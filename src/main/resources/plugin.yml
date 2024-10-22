@@ -1,8 +1,9 @@
 name: SurfPranks
-version: '1.0-SNAPSHOT'
+version: '1.0'
 main: me.luhen.surfPranks.SurfPranks
 api-version: '1.21'
 authors: [ LuHen ]
 description: Schedule custom messages to be sent to all the players on the server
 commands:
   prank: {}
+  pranks: {}
