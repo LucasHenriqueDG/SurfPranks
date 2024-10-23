@@ -2,6 +2,12 @@ command-usage-message: "&b[Surf Pranks] &dTry /prank &f<prankname>"
 wrong-command-usage-message:  "&b[Surf Pranks] &cWrong argument, try &a/pranks"
 prank-list: "&b[Surf Pranks] &dCurrent available pranks: &6%prank_list%"
 
+#Minimun interval between each prank for a player
+prank-delay: 5
+
+#Should farts cause neaby players to get poison effect? o_O
+fart-poison: true
+
 #Trigger a random prank?
 random-pranks: false
 random-prank-interval: 60

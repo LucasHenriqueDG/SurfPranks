@@ -7,11 +7,13 @@ object TimeUtils {
 
     fun isPlayerInDelay(player: Player): Boolean{
 
+        val delay = SurfPranks.instance.config.getInt("prank-delay")
+
         val currentTime = System.currentTimeMillis()
 
         val playerTime = SurfPranks.instance.prankDelay[player] ?: 0L
 
-        return if((currentTime - playerTime) > 1000) {
+        return if((currentTime - playerTime) > 1000 * delay) {
 
             SurfPranks.instance.prankDelay[player] = currentTime
 
