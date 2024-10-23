@@ -1,7 +1,7 @@
 package me.luhen.surfPranks.commands
 
 import me.luhen.surfPranks.SurfPranks
-import me.luhen.surfPranks.tasks.RandomPrank
+import me.luhen.surfPranks.tasks.RandomPrankTasks
 import me.luhen.surfPranks.utils.ChatUtils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -30,9 +30,9 @@ object SpCommand: CommandExecutor {
                     }
 
                     if(!SurfPranks.instance.config.getBoolean("random-pranks", false)) {
-                        RandomPrank.cancelRandomPrankTask()
+                        RandomPrankTasks.cancelRandomPrankTask()
                     } else {
-                        RandomPrank.randomPrank(SurfPranks.instance.config.getInt("random-prank-interval"))
+                        RandomPrankTasks.randomPrank(SurfPranks.instance.config.getInt("random-prank-interval"))
                     }
 
                 }

@@ -5,7 +5,7 @@ import me.luhen.surfPranks.pranks.Fart
 import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitTask
 
-object RandomPrank {
+object RandomPrankTasks {
 
     private var randomPrankTask: BukkitTask? = null
 

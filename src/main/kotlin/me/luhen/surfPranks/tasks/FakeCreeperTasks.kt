@@ -8,7 +8,7 @@ import org.bukkit.entity.Creeper
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitTask
 
-object FakeCreeper {
+object FakeCreeperTasks {
 
     private var fakeCreeperTask: BukkitTask? = null
 
