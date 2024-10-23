@@ -4,6 +4,7 @@ import me.luhen.surfPranks.commands.PrankCommand
 import me.luhen.surfPranks.commands.PranksCommand
 import me.luhen.surfPranks.commands.SpCommand
 import me.luhen.surfPranks.tasks.RandomPrankTasks
+import me.luhen.surfPranks.utils.ConfigUtils
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -26,6 +27,7 @@ class SurfPranks : JavaPlugin() {
     override fun onEnable() {
 
         saveDefaultConfig()
+        ConfigUtils.addValues()
 
         getCommand("prank")!!.setExecutor(PrankCommand)
         getCommand("pranks")!!.setExecutor(PranksCommand)

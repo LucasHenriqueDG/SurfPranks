@@ -6,6 +6,7 @@ import me.luhen.surfPranks.pranks.Fart
 import me.luhen.surfPranks.pranks.SpiningHead
 import me.luhen.surfPranks.pranks.Spit
 import me.luhen.surfPranks.utils.ChatUtils
+import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -16,31 +17,120 @@ object PrankCommand: CommandExecutor {
 
         if(sender is Player){
 
-            if(args.size == 1) {
+            if(args.isNotEmpty()) {
 
                 when (args[0]) {
 
                     "fart" -> {
 
-                        Fart.playerFart(sender)
+                        if(args.size == 1) {
+
+                            if(sender.hasPermission("surfpranks.self")) Fart.playerFart(sender)
+                            else sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("no-permission-message").toString())
+                            )
+
+                        } else {
+
+                            val targetPlayer = Bukkit.getPlayer(args[1])
+
+                            targetPlayer?.let{
+
+                                if(sender.hasPermission("surfpranks.others")) Fart.playerFart(it)
+                                    else sender.sendMessage(ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("no-permission-message").toString())
+                                )
+
+                            } ?: sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("player-not-found-message").toString())
+                            )
+
+                        }
 
                     }
 
                     "spit" -> {
 
-                        Spit.spit(sender)
+                        if(args.size == 1) {
+
+                            if(sender.hasPermission("surfpranks.self")) Spit.spit(sender)
+                            else sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("no-permission-message").toString())
+                            )
+
+                        } else {
+
+                            val targetPlayer = Bukkit.getPlayer(args[1])
+
+                            targetPlayer?.let{
+
+                                if(sender.hasPermission("surfpranks.others")) Spit.spit(it)
+                                    else sender.sendMessage(ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("no-permission-message").toString())
+                                )
+
+                            } ?: sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("player-not-found-message").toString())
+                            )
+
+                        }
 
                     }
 
                     "creeper" -> {
 
-                        FakeCreeper.spawnFakeCreeper(sender)
+                        if(args.size == 1) {
+
+                            if(sender.hasPermission("surfpranks.self")) FakeCreeper.spawnFakeCreeper(sender)
+                            else sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("no-permission-message").toString())
+                            )
+
+                        } else {
+
+                            val targetPlayer = Bukkit.getPlayer(args[1])
+
+                            targetPlayer?.let{
+
+                                if(sender.hasPermission("surfpranks.others")) FakeCreeper.spawnFakeCreeper(it)
+                                    else sender.sendMessage(ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("no-permission-message").toString())
+                                )
+
+                            } ?: sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("player-not-found-message").toString())
+                            )
+
+                        }
 
                     }
 
                     "skull" -> {
 
-                        SpiningHead.spawnHead(sender)
+                        if(args.size == 1) {
+
+                            if(sender.hasPermission("surfpranks.self")) SpiningHead.spawnHead(sender)
+                            else sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("no-permission-message").toString())
+                            )
+
+
+                        } else {
+
+                            val targetPlayer = Bukkit.getPlayer(args[1])
+
+                            targetPlayer?.let{
+
+                                if(sender.hasPermission("surfpranks.others")) SpiningHead.spawnHead(it)
+                                    else sender.sendMessage(ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("no-permission-message").toString())
+                                )
+
+                            } ?: sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("player-not-found-message").toString())
+                            )
+
+                        }
 
                     }
                     else -> {
