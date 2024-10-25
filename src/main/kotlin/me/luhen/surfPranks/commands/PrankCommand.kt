@@ -1,10 +1,7 @@
 package me.luhen.surfPranks.commands
 
 import me.luhen.surfPranks.SurfPranks
-import me.luhen.surfPranks.pranks.FakeCreeper
-import me.luhen.surfPranks.pranks.Fart
-import me.luhen.surfPranks.pranks.SpiningHead
-import me.luhen.surfPranks.pranks.Spit
+import me.luhen.surfPranks.pranks.*
 import me.luhen.surfPranks.utils.ChatUtils
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -133,6 +130,44 @@ object PrankCommand: CommandExecutor {
                         }
 
                     }
+
+                    "diamond" -> {
+
+                        if (args.size == 1) {
+
+                            if (sender.hasPermission("surfpranks.self")) FakeDiamond().spawnFakeDiamond(
+                                sender)
+                            else sender.sendMessage(
+                                ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("no-permission-message").toString()
+                                )
+                            )
+
+                        } else {
+
+                            val targetPlayer = Bukkit.getPlayer(args[1])
+
+                            targetPlayer?.let {
+
+                                if (sender.hasPermission("surfpranks.others")) FakeDiamond().spawnFakeDiamond(
+                                    it)
+                                else sender.sendMessage(
+                                    ChatUtils.colors(
+                                        SurfPranks.instance.config.getString("no-permission-message").toString()
+                                    )
+                                )
+
+                            } ?: sender.sendMessage(
+                                ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("player-not-found-message").toString()
+                                )
+                            )
+
+                        }
+
+
+                    }
+
                     else -> {
 
                         sender.sendMessage(
