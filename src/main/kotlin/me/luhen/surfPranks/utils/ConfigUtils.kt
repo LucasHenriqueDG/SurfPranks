@@ -18,13 +18,13 @@ object ConfigUtils {
 
         config.addDefault("player-not-found-message", "&b[Surf Pranks] &cThis player is not currently online or does not exist.")
 
+        config.addDefault("not-enough-money", "&b[Surf Pranks] &cYou don't have enough money to use this command.")
+
         config.addDefault("prank-delay", 60)
 
+        config.addDefault("prank-cost", 0.0)
+
         config.addDefault("fart-poison", true)
-
-        config.addDefault("random-pranks", false)
-
-        config.addDefault("random-prank-interval", 60)
 
 
         config.options().copyDefaults(true)

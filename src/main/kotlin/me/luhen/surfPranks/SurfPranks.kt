@@ -4,12 +4,15 @@ import me.luhen.surfPranks.commands.PrankCommand
 import me.luhen.surfPranks.commands.PranksCommand
 import me.luhen.surfPranks.commands.SpCommand
 import me.luhen.surfPranks.listeners.FakeDiamondListener
-import me.luhen.surfPranks.tasks.RandomPrankTasks
 import me.luhen.surfPranks.utils.ConfigUtils
+import net.milkbowl.vault.economy.Economy
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
 class SurfPranks : JavaPlugin() {
+
+    var econ: Economy? = null
 
     companion object {
 
@@ -27,6 +30,18 @@ class SurfPranks : JavaPlugin() {
 
     override fun onEnable() {
 
+        if(Bukkit.getPluginManager().getPlugin("Vault") != null){
+
+            logger.info("[Surf Pranks] Vault hooked.")
+            val rsp = server.servicesManager.getRegistration(Economy::class.java)
+            econ = rsp?.provider
+
+        } else {
+
+            logger.warning("[Surf Pranks] Vault no found. Some features are not going to be enabled.")
+
+        }
+
         saveDefaultConfig()
         ConfigUtils.addValues()
 
@@ -36,8 +51,6 @@ class SurfPranks : JavaPlugin() {
 
         server.pluginManager.registerEvents(FakeDiamondListener, this)
 
-        if(config.getBoolean("random-pranks", false))
-            RandomPrankTasks.randomPrank(config.getInt("random-prank-interval"))
 
     }
 

@@ -1,7 +1,10 @@
 package me.luhen.surfPranks.pranks
 
+import me.luhen.surfPranks.SurfPranks
 import me.luhen.surfPranks.tasks.SpiningHeadTasks
+import me.luhen.surfPranks.utils.ChatUtils
 import me.luhen.surfPranks.utils.TimeUtils
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity
@@ -10,29 +13,41 @@ import org.bukkit.inventory.ItemStack
 
 object SpiningHead {
 
-    fun spawnHead(player: Player) {
+    fun spawnHead(sender: Player, player: Player) {
 
-        if (TimeUtils.isPlayerInDelay(player)) {
+        val econ = SurfPranks.instance.econ
+        val prankCost = SurfPranks.instance.config.getDouble("prank-cost")
+        if(econ == null || (econ.has(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost))) {
 
-            val world = player.world
-            val direction = player.location.direction.clone().normalize()
-            val headLoc = player.location.clone().add(direction.multiply(6.1))
-            val targetLoc = player.location.toVector().subtract(headLoc.toVector()).normalize()
+            if (TimeUtils.isPlayerInDelay(player)) {
 
-            val armorStand: Entity = world.spawn(headLoc, ArmorStand::class.java) { stand ->
+                val world = player.world
+                val direction = player.location.direction.clone().normalize()
+                val headLoc = player.location.clone().add(direction.multiply(6.1))
+                val targetLoc = player.location.toVector().subtract(headLoc.toVector()).normalize()
 
-                stand.isVisible = false
-                stand.isMarker = true
-                stand.setGravity(false)
-                stand.isSmall = false
-                stand.isInvulnerable = true
+                val armorStand: Entity = world.spawn(headLoc, ArmorStand::class.java) { stand ->
 
-                val equipment = stand.equipment
-                equipment?.helmet = ItemStack(Material.WITHER_SKELETON_SKULL)
+                    stand.isVisible = false
+                    stand.isMarker = true
+                    stand.setGravity(false)
+                    stand.isSmall = false
+                    stand.isInvulnerable = true
+
+                    val equipment = stand.equipment
+                    equipment?.helmet = ItemStack(Material.WITHER_SKELETON_SKULL)
+
+                }
+
+                SpiningHeadTasks.spinningHead(armorStand, player, targetLoc)
+
+                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
 
             }
 
-            SpiningHeadTasks.spinningHead(armorStand, player, targetLoc)
+        } else {
+
+            sender.sendMessage(ChatUtils.colors(SurfPranks.instance.config.getString("not-enough-money").toString()))
 
         }
 

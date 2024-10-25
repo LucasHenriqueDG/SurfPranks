@@ -22,7 +22,7 @@ object PrankCommand: CommandExecutor {
 
                         if(args.size == 1) {
 
-                            if(sender.hasPermission("surfpranks.self")) Fart.playerFart(sender)
+                            if(sender.hasPermission("surfpranks.self")) Fart.playerFart(sender, sender)
                             else sender.sendMessage(ChatUtils.colors(
                                 SurfPranks.instance.config.getString("no-permission-message").toString())
                             )
@@ -33,7 +33,7 @@ object PrankCommand: CommandExecutor {
 
                             targetPlayer?.let{
 
-                                if(sender.hasPermission("surfpranks.others")) Fart.playerFart(it)
+                                if(sender.hasPermission("surfpranks.others")) Fart.playerFart(sender, it)
                                     else sender.sendMessage(ChatUtils.colors(
                                     SurfPranks.instance.config.getString("no-permission-message").toString())
                                 )
@@ -50,7 +50,7 @@ object PrankCommand: CommandExecutor {
 
                         if(args.size == 1) {
 
-                            if(sender.hasPermission("surfpranks.self")) Spit.spit(sender)
+                            if(sender.hasPermission("surfpranks.self")) Spit.spit(sender, sender)
                             else sender.sendMessage(ChatUtils.colors(
                                 SurfPranks.instance.config.getString("no-permission-message").toString())
                             )
@@ -61,7 +61,7 @@ object PrankCommand: CommandExecutor {
 
                             targetPlayer?.let{
 
-                                if(sender.hasPermission("surfpranks.others")) Spit.spit(it)
+                                if(sender.hasPermission("surfpranks.others")) Spit.spit(sender, it)
                                     else sender.sendMessage(ChatUtils.colors(
                                     SurfPranks.instance.config.getString("no-permission-message").toString())
                                 )
@@ -78,7 +78,7 @@ object PrankCommand: CommandExecutor {
 
                         if(args.size == 1) {
 
-                            if(sender.hasPermission("surfpranks.self")) FakeCreeper.spawnFakeCreeper(sender)
+                            if(sender.hasPermission("surfpranks.self")) FakeCreeper.spawnFakeCreeper(sender, sender)
                             else sender.sendMessage(ChatUtils.colors(
                                 SurfPranks.instance.config.getString("no-permission-message").toString())
                             )
@@ -89,7 +89,7 @@ object PrankCommand: CommandExecutor {
 
                             targetPlayer?.let{
 
-                                if(sender.hasPermission("surfpranks.others")) FakeCreeper.spawnFakeCreeper(it)
+                                if(sender.hasPermission("surfpranks.others")) FakeCreeper.spawnFakeCreeper(sender, it)
                                     else sender.sendMessage(ChatUtils.colors(
                                     SurfPranks.instance.config.getString("no-permission-message").toString())
                                 )
@@ -106,7 +106,7 @@ object PrankCommand: CommandExecutor {
 
                         if(args.size == 1) {
 
-                            if(sender.hasPermission("surfpranks.self")) SpiningHead.spawnHead(sender)
+                            if(sender.hasPermission("surfpranks.self")) SpiningHead.spawnHead(sender, sender)
                             else sender.sendMessage(ChatUtils.colors(
                                 SurfPranks.instance.config.getString("no-permission-message").toString())
                             )
@@ -118,7 +118,7 @@ object PrankCommand: CommandExecutor {
 
                             targetPlayer?.let{
 
-                                if(sender.hasPermission("surfpranks.others")) SpiningHead.spawnHead(it)
+                                if(sender.hasPermission("surfpranks.others")) SpiningHead.spawnHead(sender, it)
                                     else sender.sendMessage(ChatUtils.colors(
                                     SurfPranks.instance.config.getString("no-permission-message").toString())
                                 )
@@ -136,7 +136,7 @@ object PrankCommand: CommandExecutor {
                         if (args.size == 1) {
 
                             if (sender.hasPermission("surfpranks.self")) FakeDiamond().spawnFakeDiamond(
-                                sender)
+                                sender, sender)
                             else sender.sendMessage(
                                 ChatUtils.colors(
                                     SurfPranks.instance.config.getString("no-permission-message").toString()
@@ -150,7 +150,7 @@ object PrankCommand: CommandExecutor {
                             targetPlayer?.let {
 
                                 if (sender.hasPermission("surfpranks.others")) FakeDiamond().spawnFakeDiamond(
-                                    it)
+                                    sender, it)
                                 else sender.sendMessage(
                                     ChatUtils.colors(
                                         SurfPranks.instance.config.getString("no-permission-message").toString()

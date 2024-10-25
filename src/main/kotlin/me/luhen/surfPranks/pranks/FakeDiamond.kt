@@ -1,24 +1,45 @@
 package me.luhen.surfPranks.pranks
 
+import me.luhen.surfPranks.SurfPranks
+import me.luhen.surfPranks.utils.ChatUtils
+import me.luhen.surfPranks.utils.TimeUtils
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class FakeDiamond {
 
-    fun spawnFakeDiamond(player: Player){
+    fun spawnFakeDiamond(sender: Player, player: Player){
 
-        val diamond = ItemStack(Material.DIAMOND)
-        val meta = diamond.itemMeta
+        val econ = SurfPranks.instance.econ
+        val prankCost = SurfPranks.instance.config.getDouble("prank-cost")
+        if(econ == null || (econ.has(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost))) {
 
-        val lore = mutableListOf("Fake diamond")
+            if(TimeUtils.isPlayerInDelay(sender)) {
 
-        meta?.lore = lore
-        diamond.itemMeta = meta
+                val diamond = ItemStack(Material.DIAMOND)
+                val meta = diamond.itemMeta
 
-        val spawnLocation = player.getLineOfSight(setOf(Material.AIR), 5).last().location
+                val lore = mutableListOf("Fake diamond")
 
-        spawnLocation.world?.dropItem(spawnLocation, diamond)
+                meta?.lore = lore
+                diamond.itemMeta = meta
+
+                val spawnLocation = player.getLineOfSight(setOf(Material.AIR), 5).last().location
+
+                spawnLocation.world?.dropItem(spawnLocation, diamond)
+
+                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
+
+
+            }
+
+        } else {
+
+            sender.sendMessage(ChatUtils.colors(SurfPranks.instance.config.getString("not-enough-money").toString()))
+
+        }
 
 
     }
