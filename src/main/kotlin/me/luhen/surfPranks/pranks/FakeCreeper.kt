@@ -19,20 +19,32 @@ object FakeCreeper {
 
             if (TimeUtils.isPlayerInDelay(player)) {
 
-                val creeper = player.world.spawn(player.location, Creeper::class.java) {
+                if (SurfPranks.instance.disabledWorlds.contains(player.world.name)) {
 
-                    it.isInvulnerable = true
-                    it.isSilent = true
-                    it.isPowered = false
-                    it.isAware = false
+                    sender.sendMessage(
+                        ChatUtils.colors(
+                            SurfPranks.instance.config.getString("disabled-world-message").toString()
+                        )
+                    )
+
+                } else {
+
+                    val creeper = player.world.spawn(player.location, Creeper::class.java) {
+
+                        it.isInvulnerable = true
+                        it.isSilent = true
+                        it.isPowered = false
+                        it.isAware = false
+
+                    }
+
+                    player.playSound(player.location, Sound.ENTITY_CREEPER_PRIMED, 0.8f, 0.8f)
+
+                    FakeCreeperTasks.fakeCreeper(player, creeper)
+
+                    econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
 
                 }
-
-                player.playSound(player.location, Sound.ENTITY_CREEPER_PRIMED, 0.8f, 0.8f)
-
-                FakeCreeperTasks.fakeCreeper(player, creeper)
-
-                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
 
             }
 

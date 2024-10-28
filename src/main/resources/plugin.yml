@@ -4,6 +4,8 @@ main: me.luhen.surfPranks.SurfPranks
 api-version: '1.21'
 authors: [ LuHen ]
 description: Schedule custom messages to be sent to all the players on the server
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:2.0.0
 commands:
   prank: {}
   pranks: {}

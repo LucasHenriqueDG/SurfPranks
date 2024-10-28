@@ -20,6 +20,10 @@ object ConfigUtils {
 
         config.addDefault("not-enough-money", "&b[Surf Pranks] &cYou don't have enough money to use this command.")
 
+        config.addDefault("disabled-world-message", "&b[Surf Pranks] &dThis player is in a world with pranks disabled.")
+
+        config.addDefault("disabled-worlds", listOf<String>())
+
         config.addDefault("prank-delay", 60)
 
         config.addDefault("prank-cost", 0.0)

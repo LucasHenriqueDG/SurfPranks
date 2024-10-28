@@ -18,20 +18,32 @@ class FakeDiamond {
 
             if(TimeUtils.isPlayerInDelay(sender)) {
 
-                val diamond = ItemStack(Material.DIAMOND)
-                val meta = diamond.itemMeta
+                if (SurfPranks.instance.disabledWorlds.contains(player.world.name)) {
 
-                val lore = mutableListOf("Fake diamond")
+                    sender.sendMessage(
+                        ChatUtils.colors(
+                            SurfPranks.instance.config.getString("disabled-world-message").toString()
+                        )
+                    )
 
-                meta?.lore = lore
-                diamond.itemMeta = meta
+                } else {
 
-                val spawnLocation = player.getLineOfSight(setOf(Material.AIR), 5).last().location
+                    val diamond = ItemStack(Material.DIAMOND)
+                    val meta = diamond.itemMeta
 
-                spawnLocation.world?.dropItem(spawnLocation, diamond)
+                    val lore = mutableListOf("Fake diamond")
 
-                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
+                    meta?.lore = lore
+                    diamond.itemMeta = meta
 
+                    val spawnLocation = player.getLineOfSight(setOf(Material.AIR), 5).last().location
+
+                    spawnLocation.world?.dropItem(spawnLocation, diamond)
+
+                    econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
+
+
+                }
 
             }
 

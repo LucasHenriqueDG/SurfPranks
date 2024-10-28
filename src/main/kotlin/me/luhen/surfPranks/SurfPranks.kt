@@ -4,6 +4,7 @@ import me.luhen.surfPranks.commands.PrankCommand
 import me.luhen.surfPranks.commands.PranksCommand
 import me.luhen.surfPranks.commands.SpCommand
 import me.luhen.surfPranks.listeners.FakeDiamondListener
+import me.luhen.surfPranks.listeners.WardenListener
 import me.luhen.surfPranks.utils.ConfigUtils
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Bukkit
@@ -13,6 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin
 class SurfPranks : JavaPlugin() {
 
     var econ: Economy? = null
+
+    val disabledWorlds = mutableListOf<String>()
 
     companion object {
 
@@ -50,6 +53,13 @@ class SurfPranks : JavaPlugin() {
         getCommand("surfpranks")!!.setExecutor(SpCommand)
 
         server.pluginManager.registerEvents(FakeDiamondListener, this)
+        server.pluginManager.registerEvents(WardenListener, this)
+
+        config.getStringList("disabled-worlds").forEach{
+
+            disabledWorlds.add(it)
+
+        }
 
 
     }

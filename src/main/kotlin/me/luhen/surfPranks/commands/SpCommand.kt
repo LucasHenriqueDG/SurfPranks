@@ -18,6 +18,18 @@ object SpCommand: CommandExecutor {
 
                     SurfPranks.instance.reloadConfig()
 
+                    SurfPranks.instance.let {
+
+                        it.disabledWorlds.clear()
+
+                        it.config.getStringList("disabled-worlds").forEach{ world ->
+
+                            it.disabledWorlds.add(world)
+
+                        }
+
+                    }
+
                     if (sender is Player) {
 
                         sender.sendMessage(ChatUtils.colors("&b[Surf Pranks] &dConfig file reloaded!"))

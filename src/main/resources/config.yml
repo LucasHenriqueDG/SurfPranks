@@ -4,6 +4,10 @@ prank-list: "&b[Surf Pranks] &dCurrent available pranks: &6%prank_list%"
 no-permission-message: "&b[Surf Pranks] &cYou do not have permission to use this command."
 player-not-found-message: "&b[Surf Pranks] &cThis player is not currently online or does not exist."
 not-enough-money: "&b[Surf Pranks] &cYou don't have enough money to use this command."
+disabled-world-message: "&b[Surf Pranks] &dThis player is in a world with pranks disabled."
+
+#if the target player is in one of these worlds, the prank will not run
+disabled-worlds: []
 
 #If vault is enabled
 prank-cost: 0.0

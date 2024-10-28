@@ -22,28 +22,40 @@ object Fart {
 
             if (TimeUtils.isPlayerInDelay(player)) {
 
-                val fartDirection = player.location.direction.clone().normalize()
-                val fartLoc = player.location.clone().add(fartDirection.multiply(-0.5))
+                if (SurfPranks.instance.disabledWorlds.contains(player.world.name)) {
 
-                player.world.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, fartLoc, 2, 0.2, 0.2, 0.2, 0.0)
+                    sender.sendMessage(
+                        ChatUtils.colors(
+                            SurfPranks.instance.config.getString("disabled-world-message").toString()
+                        )
+                    )
 
-                player.playSound(player.location, Sound.ENTITY_ZOMBIE_STEP, 0.5f, 0.5f)
+                } else {
 
-                if (fartPoison) {
+                    val fartDirection = player.location.direction.clone().normalize()
+                    val fartLoc = player.location.clone().add(fartDirection.multiply(-0.5))
 
-                    player.world.getNearbyEntities(player.location.clone(), 5.0, 5.0, 5.0).forEach {
+                    player.world.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, fartLoc, 2, 0.2, 0.2, 0.2, 0.0)
 
-                        if (it is Player) {
+                    player.playSound(player.location, Sound.ENTITY_ZOMBIE_STEP, 0.5f, 0.5f)
 
-                            it.addPotionEffect(PotionEffect(PotionEffectType.POISON, 40, 1))
+                    if (fartPoison) {
+
+                        player.world.getNearbyEntities(player.location.clone(), 5.0, 5.0, 5.0).forEach {
+
+                            if (it is Player) {
+
+                                it.addPotionEffect(PotionEffect(PotionEffectType.POISON, 40, 1))
+
+                            }
 
                         }
 
                     }
 
-                }
+                    econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
 
-                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
+                }
 
             }
 

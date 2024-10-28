@@ -12,7 +12,7 @@ object PranksCommand:CommandExecutor {
 
         if(sender is Player){
 
-            val pranks = "fart, spit, creeper, skull, diamond"
+            val pranks = "fart, spit, creeper, skull, diamond, warden"
 
             sender.sendMessage(ChatUtils.colors(ChatUtils.replacePlaceholders(
                 SurfPranks.instance.config.getString("prank-list").toString(), Pair("%prank_list%", pranks)))

@@ -18,11 +18,23 @@ object Spit {
 
             if (TimeUtils.isPlayerInDelay(player)) {
 
-                player.launchProjectile(LlamaSpit::class.java)
+                if (SurfPranks.instance.disabledWorlds.contains(player.world.name)) {
 
-                player.playSound(player.location, Sound.ENTITY_LLAMA_SPIT, 0.5f, 0.5f)
+                    sender.sendMessage(
+                        ChatUtils.colors(
+                            SurfPranks.instance.config.getString("disabled-world-message").toString()
+                        )
+                    )
 
-                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
+                } else {
+
+                    player.launchProjectile(LlamaSpit::class.java)
+
+                    player.playSound(player.location, Sound.ENTITY_LLAMA_SPIT, 0.5f, 0.5f)
+
+                    econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
+
+                }
 
             }
 

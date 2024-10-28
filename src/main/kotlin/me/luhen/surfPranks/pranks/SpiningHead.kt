@@ -21,27 +21,39 @@ object SpiningHead {
 
             if (TimeUtils.isPlayerInDelay(player)) {
 
-                val world = player.world
-                val direction = player.location.direction.clone().normalize()
-                val headLoc = player.location.clone().add(direction.multiply(6.1))
-                val targetLoc = player.location.toVector().subtract(headLoc.toVector()).normalize()
+                if (SurfPranks.instance.disabledWorlds.contains(player.world.name)) {
 
-                val armorStand: Entity = world.spawn(headLoc, ArmorStand::class.java) { stand ->
+                    sender.sendMessage(
+                        ChatUtils.colors(
+                            SurfPranks.instance.config.getString("disabled-world-message").toString()
+                        )
+                    )
 
-                    stand.isVisible = false
-                    stand.isMarker = true
-                    stand.setGravity(false)
-                    stand.isSmall = false
-                    stand.isInvulnerable = true
+                } else {
 
-                    val equipment = stand.equipment
-                    equipment?.helmet = ItemStack(Material.WITHER_SKELETON_SKULL)
+                    val world = player.world
+                    val direction = player.location.direction.clone().normalize()
+                    val headLoc = player.location.clone().add(direction.multiply(6.1))
+                    val targetLoc = player.location.toVector().subtract(headLoc.toVector()).normalize()
+
+                    val armorStand: Entity = world.spawn(headLoc, ArmorStand::class.java) { stand ->
+
+                        stand.isVisible = false
+                        stand.isMarker = true
+                        stand.setGravity(false)
+                        stand.isSmall = false
+                        stand.isInvulnerable = true
+
+                        val equipment = stand.equipment
+                        equipment?.helmet = ItemStack(Material.WITHER_SKELETON_SKULL)
+
+                    }
+
+                    SpiningHeadTasks.spinningHead(armorStand, player, targetLoc)
+
+                    econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
 
                 }
-
-                SpiningHeadTasks.spinningHead(armorStand, player, targetLoc)
-
-                econ?.withdrawPlayer(Bukkit.getOfflinePlayer(sender.uniqueId), prankCost)
 
             }
 
