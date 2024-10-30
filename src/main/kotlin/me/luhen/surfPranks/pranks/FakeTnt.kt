@@ -9,6 +9,7 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.entity.TNTPrimed
+import org.bukkit.util.Vector
 
 object FakeTnt {
 
@@ -30,7 +31,7 @@ object FakeTnt {
 
                 } else {
 
-                    val loc = player.getLineOfSight(setOf(Material.AIR), 5).last().location
+                    val loc = player.getLineOfSight(setOf(Material.AIR), 5).last().location.add(Vector(0.0, 1.0, 0.0))
                     val tnt = player.world.spawn(loc, TNTPrimed::class.java).apply {
 
                         fuseTicks = 80
