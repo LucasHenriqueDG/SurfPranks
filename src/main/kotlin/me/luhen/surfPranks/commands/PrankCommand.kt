@@ -102,6 +102,35 @@ object PrankCommand: CommandExecutor {
 
                     }
 
+                    "tnt" -> {
+
+                        if(args.size == 1) {
+
+                            if(sender.hasPermission("surfpranks.self")) FakeTnt.fakeTnt(sender, sender)
+                            else sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("no-permission-message").toString())
+                            )
+
+
+                        } else {
+
+                            val targetPlayer = Bukkit.getPlayer(args[1])
+
+                            targetPlayer?.let{
+
+                                if(sender.hasPermission("surfpranks.others")) FakeTnt.fakeTnt(sender, it)
+                                else sender.sendMessage(ChatUtils.colors(
+                                    SurfPranks.instance.config.getString("no-permission-message").toString())
+                                )
+
+                            } ?: sender.sendMessage(ChatUtils.colors(
+                                SurfPranks.instance.config.getString("player-not-found-message").toString())
+                            )
+
+                        }
+
+                    }
+
                     "skull" -> {
 
                         if(args.size == 1) {
